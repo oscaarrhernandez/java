@@ -168,7 +168,7 @@ public void toString(){
  */
 public String[][] ArrayListToMatrix(){
     String[][] data = new String[listaObjetos.size()][];
-    for(int i=0;i>listaObjetos.size();i++){
+    for(int i=0;i<listaObjetos.size();i++){
         data[i]=listaObjetos.get(i).toString().split("#");
     }
     return data;
