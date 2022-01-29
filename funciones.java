@@ -44,7 +44,7 @@ public void altaObjeto(String[] data){
     DAR DE BAJA
  */
 public void bajaObjeto(String eliminar){
-    for(Objeto objeto :: listaObjetos){
+    for(Objeto objeto : listaObjetos){
         if(objeto.getAtributo1().equals(eliminar)){
             listaObjetos.remove(eliminar);
         }
@@ -55,7 +55,7 @@ public void bajaObjeto(String eliminar){
     MODIFICAR ATRIBUTOS
  */
 public void modificar(String Atributo, String newAtributo){
-    for(Objeto objeto :: listaObjetos){
+    for(Objeto objeto : listaObjetos){
         if(objeto.getAtributo1().equalsIgnoreCase(Atributo)){
             objeto.setAtributo1(newAtributo);
         }
@@ -126,7 +126,7 @@ public void cargar(){
         ObjectInputStream ois = new ObjectInputStream(bis);
         listaObjetos = (ArrayList<Objeto>) ois.readObject();
         ois.close();
-    }catch(IOException e || ClassNotFoundException e){
+    }catch(IOException e ){
         e.printStackTrace();
     }
 }
