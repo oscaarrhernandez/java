@@ -72,7 +72,7 @@ Indicaciones adicionales
 //PRIMERA PARTE A
 //Persona
 public Persona Factory(String linea, String delim){
-  String[] campos = linea.split(delimit);
+  String[] campos = linea.split(delim);
   try{
     int token1 = Integer.parseInt(campos[4]);
     float token2 = FLoat.parseFloat(campos[5]);
