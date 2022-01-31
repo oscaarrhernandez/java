@@ -44,10 +44,23 @@ public void altaObjeto(String[] data){
     DAR DE BAJA
  */
 public void bajaObjeto(String eliminar){
+    int indiceABorrar = -1;
+    int existe=0;
     for(Objeto objeto : listaObjetos){
-        if(objeto.getAtributo1().equals(eliminar)){
-            listaObjetos.remove(eliminar);
+        if(eliminar.equalsIgnoreCase(objeto.eliminar)){
+            existe=1;
+            break;
         }
+    }
+    if(existe==1){
+        for(int i=1;i<listaObjetos.size();i++){
+            if(eliminar.equalsIgnoreCase(listaObjetos.get(i).eliminar)){
+                indiceABorrar=i;
+            }
+        }
+        listaObjetos.remove(indiceABorrar);
+    }else{
+        System.err.printf("No pudo borrarse");
     }
 }
 
