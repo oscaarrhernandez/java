@@ -115,9 +115,18 @@ public void ordenarPorEdadApellidosYpeso(){
   Collections.sort(personas, Comparator.comparing(Persona::getEdad).thenComparing(Persona::getAp1).thenComparing(Persona::getAp2).thenComparing(Persona::getPeso));
 }
 
-// TERCERA PARTE
-
-
+// TERCERA PARTE Model
+public void prepararMapa(){
+  for(Persona p : personas){
+    mapa.put(p.getDni(),p);
+  }
+}
+public String datosDePersonaComoStringDelimitado(Strind dni,String delim){
+  Persona p = mapa.get(dni);
+  String data = "";
+  token = p.getNombre() + "delim" + p.getAp1() + "delim" + p.getAp2() + "delim" + p.getDni() + "delim" + p.getEdad() + "delim" + p.getTalla() + "delim" + p.getPeso() + "delim";
+  return token;
+}
 // CUARTA PARTE A
 //Controlador
 public void exportarPersonasConFormatoDelimitado(String delim){
