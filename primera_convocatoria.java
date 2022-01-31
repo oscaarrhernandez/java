@@ -75,7 +75,7 @@ public Persona Factory(String linea, String delim){
   String[] campos = linea.split(delim);
   try{
     int token1 = Integer.parseInt(campos[4]);
-    float token2 = FLoat.parseFloat(campos[5]);
+    float token2 = Float.parseFloat(campos[5]);
     double token3 = Double.parseDouble(campos[6]);
     return new Persona(campos[0],campos[1],campos[2],campos[3],token1,token2,token3);
   }catch(NumberFormatException e){
@@ -121,10 +121,10 @@ public void prepararMapa(){
     mapa.put(p.getDni(),p);
   }
 }
-public String datosDePersonaComoStringDelimitado(Strind dni,String delim){
+public String datosDePersonaComoStringDelimitado(String dni,String delim){
   Persona p = mapa.get(dni);
-  String data = "";
-  token = p.getNombre() + "delim" + p.getAp1() + "delim" + p.getAp2() + "delim" + p.getDni() + "delim" + p.getEdad() + "delim" + p.getTalla() + "delim" + p.getPeso() + "delim";
+  String token;
+  token = p.getNombre() + delim + p.getAp1() + delim + p.getAp2() + delim + p.getDni() + delim + p.getEdad() + delim + p.getTalla() + delim + p.getPeso() + delim;
   return token;
 }
 // CUARTA PARTE A
@@ -133,16 +133,17 @@ public void exportarPersonasConFormatoDelimitado(String delim){
   String nombrearch = Model.getNameOfTextFile();
   Path ruta = Rutas.pathToFileOnDesktop(nombrearch);
   File f = ruta.toFile();
+  Model.ordenarPorApellidosNombreYdni();
   String[][] data = new String[Model.personas.size()][];
   for(int i=0; i<Model.personas.size();i++){
     data[i]= Model.personas.get(i).estadoComoArrayDeCadenas().split(delim);
   }
-  Model.ordenarPorApellidosNombreYdni();
   try{
     exportToDisk(f,delim);
   }catch(IOException e){
     e.printStackTrace();
   }
+}
   //Persona
   public void estadoComoArrayDeCadenas(){
     String token = "";
