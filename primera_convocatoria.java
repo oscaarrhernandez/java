@@ -69,3 +69,75 @@ Indicaciones adicionales
 - Se debe usar la biblioteca de Coti cuando sea posible, facilitando así el código.
 */
 
+//PRIMERA PARTE A
+//Persona
+public Persona Factory(String linea, String delim){
+  String[] campos = linea.split(delimit);
+  try{
+    int token1 = Integer.parseInt(campos[4]);
+    float token2 = FLoat.parseFloat(campos[5]);
+    double token3 = Double.parseDouble(campos[6]);
+    return new Persona(campos[0],campos[1],campos[2],campos[3],token1,token2,token3);
+  }catch(NumberFormatException e){
+    return null;
+  }
+}
+//PRIMERA PARTE B
+//Model
+public void importar(Path ruta){
+  if(ruta.toFile().exists()){
+    try{
+      //File f = ruta.toFile(); no se si es necesaria
+      ArrayList<String> lineas = (ArrayList<String>) readAllLines(ruta);
+      String delim = "#";
+      for(String i : lineas){
+        Persona p = Persona.Factory(i, delim);
+        if(p!= null){
+          personas.add(p);
+        }else{
+          System.err.printf("Error.");
+        }
+      }
+    }catch(IOException e){
+      System.err.printf("Error");
+    } 
+ }
+}
+
+// SEGUNDA PARTE A,B,C TODO EN Model
+public void ordenarPorApellidosNombreYdni(){
+  Collections.sort(personas, Comparator.comparing(Persona::getAp1).thenComparing(Persona::getAp2).thenComparing(Persona::getNombre).thenComparing(Persona::getDni));
+}
+public void ordenarPorEdadPesoTallaYdni(){
+  Collections.sort(personas, Comparator.comparing(Persona::getEdad).thenComparing(Persona::getPeso).thenComparing(Persona::getTalla).thenComparing(Persona::getDni));
+}
+public void ordenarPorEdadApellidosYpeso(){
+  Collections.sort(personas, Comparator.comparing(Persona::getEdad).thenComparing(Persona::getAp1).thenComparing(Persona::getAp2).thenComparing(Persona::getPeso));
+}
+
+// TERCERA PARTE
+
+
+// CUARTA PARTE A
+//Controlador
+public void exportarPersonasConFormatoDelimitado(String delim){
+  String nombrearch = Model.getNameOfTextFile();
+  Path ruta = Rutas.pathToFileOnDesktop(nombrearch);
+  File f = ruta.toFile();
+  String[][] data = new String[Model.personas.size()][];
+  for(int i=0; i<Model.personas.size();i++){
+    data[i]= Model.personas.get(i).estadoComoArrayDeCadenas().split(delim);
+  }
+  Model.ordenarPorApellidosNombreYdni();
+  try{
+    exportToDisk(f,delim);
+  }catch(IOException e){
+    e.printStackTrace();
+  }
+  //Persona
+  public void estadoComoArrayDeCadenas(){
+    String token = "";
+    token = getNombre() + "#" + getAp1() + "#" + getAp2() + "#" + getDni() + "#" + getEdad() + "#" + getTalla() + "#" + getPeso() + "#";
+    return token;
+  }
+}
