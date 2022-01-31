@@ -66,7 +66,7 @@ Indicaciones adicionales
 - Es recomendable reutilizar métodos ya creados en otras partes del examen.
 - Todos los identificadores deben seguir las normas habituales de un programa en Java.
 - Se valora positivamente indicar los import necesarios en cada pregunta.
-- Se debe usar la biblioteca de Coti cuando sea posible, facilitando así el código.
+- Se debe usar la biblioteca de Coti cuando sea posible, facilitando así el código. 
 */
 
 //PRIMERA PARTE A
@@ -104,7 +104,7 @@ public void importar(Path ruta){
  }
 }
 
-// SEGUNDA PARTE A,B,C TODO EN Model
+// SEGUNDA PARTE A,B,C TODO en Model
 public void ordenarPorApellidosNombreYdni(){
   Collections.sort(personas, Comparator.comparing(Persona::getAp1).thenComparing(Persona::getAp2).thenComparing(Persona::getNombre).thenComparing(Persona::getDni));
 }
@@ -115,7 +115,7 @@ public void ordenarPorEdadApellidosYpeso(){
   Collections.sort(personas, Comparator.comparing(Persona::getEdad).thenComparing(Persona::getAp1).thenComparing(Persona::getAp2).thenComparing(Persona::getPeso));
 }
 
-// TERCERA PARTE Model
+// TERCERA PARTE Ambos métodos en Model
 public void prepararMapa(){
   for(Persona p : personas){
     mapa.put(p.getDni(),p);
@@ -150,3 +150,23 @@ public void exportarPersonasConFormatoDelimitado(String delim){
     return token;
   }
 }
+/**
+  IMPORTS
+  PRIMERA PARTE:
+    import java.io.*;
+    import java.lang.*;
+    import com.coti.tools.*;
+    import java.nio.file.Path;
+    import java.util.ArrayList;
+    import java.io.IOException;
+    import static java.nio.file.Files.readAllLines;
+   SEGUNDA PARTE:
+    import java.util.Comparator;
+  TERCERA PARTE:
+    import java.util.Map;
+    import java.util.HashMap;
+  CUARTA PARTE:
+    import java.nio.file.Path;
+    import com.coti.tools.*;
+    import java.io.IOException;
+*/
