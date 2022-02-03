@@ -1,5 +1,5 @@
 /**
-*     Importar .txt y .bin
+*     Importar .txt | .bin | .col
 */
 public void importarTexto() throws IOException{
   Path ruta = Rutas.pathToFileInFolderOnDesktop(namefolder,namefiletxt);
@@ -38,9 +38,11 @@ public void importarBin(){
   }
 }
 
+public void importarCol(){
 
+}
 /**
-*     Exportar .txt y .bin
+*     Exportar .txt | .bin | .col
 */
 public void exportarTexto(){
   Path ruta = Rutas.pathToFileInFolderOnDesktop(namefolder,namefiletxt);
@@ -68,6 +70,29 @@ public void exortarBinario(){
   }catch(IOException e){
     e.printStackTrace();
   }
+}
+
+public void exportarCol() throws Exception{
+  boolean aux = true;
+  File file = new File(Rutas.pathToFolderOnDesktop(folder).toFile() + separador +  "directores" + ".col");
+  Path p = f.toPath();
+  List<String> obj = new ArrayList<>();
+  for(Objetos o : listaobjetos){
+    obj.add(o.exportStateAsCol(aux));
+  }
+  Files.write(p,obj,Charset.forName("UTF-8"));
+}
+//en objeto
+public String exportStateAsCol(boolean aux) throws ParseException{
+  String tituto = new String();
+  if(aux == true){
+    for(int i=0; i < this.caracteristicas.size();i++){
+      titulo += this.caracteristicas.get(i).getCaracteristica() + "\t"; 
+    }
+  }else{
+    return String.format("%-30s%-20s%-20s%-70s",this.Atr1,this.Atr2,this.Atr3,this.Atr4);
+  }
+  return String.format("%-30s%-20s%-20s%-70s%-80s",this.Atr1,this.Atr2,this.Atr3,this.Atr4,caracteristica);
 }
 
 /**
