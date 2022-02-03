@@ -109,7 +109,26 @@ public void importar(){
         }
     }
 }
-
+public void importar(){
+	Path p = Rutas.pathToFileInFolderOnDesktop("Folder","archivo.txt");
+	if(p.toFile().exists()){
+		try{
+			ArrayList<String> lineas = (ArrayList<String>) readAllLines(p);
+			String delim = "#";
+			for(String i : lineas){
+				Objeto obj = o.factory(i,delim);
+				if(obj!=null){
+					listaObjetos.add(obj);
+				}else{
+					System.err.printf("Error.%n");
+				}
+			}
+		}catch(IOException e){
+			System.err.printf("Error.%n");
+		}
+	}
+}
+.
 /**
     ARCHIVOS DELIMITADOS EXPORTAR
  */
