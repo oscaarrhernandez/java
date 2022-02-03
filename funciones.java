@@ -25,9 +25,9 @@ public static Objeto factory(String[] data){
 
 public void ordenarObjetos(){
     //Ordenar por un parámetro
-    Collections.sort(listaObjetos, Comparator.comparing(Objeto::getAtributo1));
+    listaObjetos.sort(Comparator.comparing(Objeto::getAtributo1));
     //Ordenar por mas de 1 parámetro (2 en este caso)
-    Collections.sort(listaObjetos, Comparator.comparing(Objeto::getAtributo1).thenComparing(Objeto::getAtributo2));
+    listaObjetos.sort(Comparator.comparing(Objeto::getAtributo1).thenComparing(Objeto::getAtributo2));
 }
 
 /**
