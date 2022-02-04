@@ -68,7 +68,7 @@ public void exportarTexto(){
   }
 }
 
-public void exortarBinario(){
+public void exportarBinario(){
   Path ruta = Rutas.pathToFileInFolderOnDesktop(namefolder,namefilebin);
   File file = ruta.toFile();
   try{
