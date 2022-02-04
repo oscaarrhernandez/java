@@ -199,7 +199,7 @@ public String[] estadoComoArrayDeCadenas(){
 	String[] linea = null;
 	linea[0] = this.nombre;
 	linea[1] = this.ap1;
-    linea[2] = this.ap2;
+    	linea[2] = this.ap2;
 	linea[3] = String.valueOf(this.edad);
 	linea[4] = String.valueOf(this.talla);
 	linea[5] = String.valueOf(this.peso);
