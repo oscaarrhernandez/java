@@ -169,7 +169,18 @@ public String consultar(String Atr1){
 public void ordenar(){
   listaObjetos.sort(Comparator.comparing(Objeto::getAtr1).thenComparing(Objeto::getAtr2).thenComparing(Objeto::getAtr3));
 }
-
+public String[] ordenar(){
+	String[] objordenado = new String[listaobjetos.size()];
+  Collections.sort(listaobjetos, new Comparato<Objeto>()){
+    public int compare(Objeto o1, Objeto o2){
+      return o1.getAtr1().compateTo(o2.getAtr1());
+    }
+  });
+  for(int i=0;i<listaObjetos.size();i++){
+    objordenado[i]= listaObjetos.get(i).exportStateAsCol()
+  }
+  return objordenado;
+}
 /**
 *     ToString y Mostrar por pantalla
 */
