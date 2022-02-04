@@ -39,10 +39,20 @@ public void importarBin(){
 }
 
 public void importarCol(){
-
+  Path ruta =Rutas.pathToFileInFolderOnDesktop(namefolder,namefilecol);
+  File file = ruta.toFile();
+  try{
+    FileInputStream fis = new FileInputStream(file);
+    BufferedInputStream bis = new BufferedInputStream(fis);
+    ObjectInputStream ois = new ObjectInputStream(bis);
+    listaObjetos = (ArrayList<String>) ois.readObject();
+    ois.close();
+  }catch(IOException | ClassNotFoundException ex){
+    ex.printStackTrace();
+  }
 }
 /**
-*     Exportar .txt | .bin | .col
+*     Exportar .txt | .bin | .col | .html
 */
 public void exportarTexto(){
   Path ruta = Rutas.pathToFileInFolderOnDesktop(namefolder,namefiletxt);
@@ -93,6 +103,25 @@ public String exportStateAsCol(boolean aux) throws ParseException{
     return String.format("%-30s%-20s%-20s%-70s",this.Atr1,this.Atr2,this.Atr3,this.Atr4);
   }
   return String.format("%-30s%-20s%-20s%-70s%-80s",this.Atr1,this.Atr2,this.Atr3,this.Atr4,caracteristica);
+}
+
+public void exportarHTML(){
+  File f = new File(Rutas.pathToFolderOnDesktop(folder).toFile()+separador+namearchivo);
+  PrintWriter pw = new PrintWriter(f);
+  pw.printf(formatohtml);
+  for(Objeto o : listaObjetos){
+    pw.printf("%s%n",o.exportAsHTML());
+  }
+    pw.print(cierrehtml);
+    pw.close();
+}
+//en objeto
+public void exportAsHTML(){
+  return String.format("<TD>%s</TD>"
+                + "<TD>%d</TD>"
+                + "<TD>%d</TD>"
+                + "<TD>%s</TD>",
+                  this.Atr1,this.Atr2,this.Atr3);
 }
 
 /**
@@ -175,7 +204,6 @@ public void ArrayListToMatrix(){
   printToScreen3(data);
 }
 
-
 /**
 *     Factory
 */
@@ -202,6 +230,3 @@ public static Objeto factory(String[] campos){
 		return null;
 	}	
 }
-
-
-
